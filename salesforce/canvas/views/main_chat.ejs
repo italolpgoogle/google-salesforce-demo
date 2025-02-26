@@ -288,7 +288,7 @@
           ></agent-assist-ui-modules>
           <!-- v-if="authToken && cachedComponents[0] === 'container_v2' && features.length !== 0" -->
           <agent-assist-ui-modules-v2
-            v-if="authToken && cachedComponents[0] === 'container_v2'"
+            v-if="cachedComponents[0] === 'container_v2'"
           ></agent-assist-ui-modules-v2>
           <agent-assist-summarization
             v-if="cachedComponents.includes('summarization')"
