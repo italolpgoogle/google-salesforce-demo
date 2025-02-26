@@ -286,17 +286,10 @@
             v-bind:auth-token="authToken"
             v-bind:namespace="namespace"
           ></agent-assist-ui-modules>
-          <agent-assist-ui-modules
-            v-if="authToken && cachedComponents[0] === 'container_v2' && features.length !== 0"
-            class="agent-assist-ui-modules"
-            channel="chat"
-            agent-desktop="Custom"
-            v-bind:custom-api-endpoint="proxyServerEndpoint"
-            v-bind:features="features"
-            v-bind:conversation-profile="conversationProfile"
-            v-bind:auth-token="authToken"
-            v-bind:namespace="namespace"
-          ></agent-assist-ui-modules>
+          <!-- v-if="authToken && cachedComponents[0] === 'container_v2' && features.length !== 0" -->
+          <agent-assist-ui-modules-v2
+            v-if="authToken && cachedComponents[0] === 'container_v2'"
+          ></agent-assist-ui-modules-v2>
           <agent-assist-summarization
             v-if="cachedComponents.includes('summarization')"
             v-bind:namespace="namespace"
