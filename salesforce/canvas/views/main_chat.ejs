@@ -118,10 +118,17 @@
         'live_translation'
       ];
       const componentsToLoad = components.filter((component) => cachedComponents.includes(component));
-      var scriptsToLoad =
-        componentsToLoad[0] === 'container'
-          ? componentsToLoad
-          : ['common',  ...componentsToLoad];
+      var scriptsToLoad;
+      switch (componentsToLoad[0]) {
+        case 'container':
+          scriptsToLoad = componentsToLoad;
+          break;
+        case 'container_v2':
+          scriptsToLoad = ['transcript'];
+          break;
+        default:
+          scriptsToLoad = ['common', ...componentsToLoad];
+      }
       var scriptsLoaded = Promise.all(scriptsToLoad.map((script) => loadScript(script)));
     </script>
 
