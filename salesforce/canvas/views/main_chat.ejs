@@ -96,7 +96,7 @@
             ? `${localUrl}/${component}.js`
             : SCRIPT_SOURCES[environment][component];
 
-        console.log('SOURCE: '. src);
+        console.log('SOURCE: ', src);
 
         script.setAttribute('src', src);
         document.head.appendChild(script);
