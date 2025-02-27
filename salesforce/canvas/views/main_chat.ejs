@@ -96,8 +96,6 @@
             ? `${localUrl}/${component}.js`
             : SCRIPT_SOURCES[environment][component];
 
-        console.log('SOURCE: ', src);
-
         script.setAttribute('src', src);
         document.head.appendChild(script);
 
@@ -549,7 +547,7 @@
             let connector;
 
             // Connector must be initialized manually for non-container-based usage.
-            if (!cachedComponents.includes('container') && !cachedComponents.includes('container_v2')) {
+            if (!cachedComponents.includes('container')) {
               watch(authToken, (newValue) => {
                 if (!connector) {
                   connector = new UiModulesConnector();
