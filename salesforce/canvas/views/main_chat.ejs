@@ -621,12 +621,12 @@
             // Populate agent input box with AI coach suggestion.
             addAgentAssistEventListener(
               'agent-coaching-response-selected',
-              ({ detail: { message } }) => {
+              ({ detail: { selectedResponse } }) => {
                 // If agent input box already has a value, remove surrounding whitespace and add a space at the end.
                 if (agentMessage.value) {
                   agentMessage.value = agentMessage.value.trim() + ' ';
                 }
-                agentMessage.value += message;
+                agentMessage.value += selectedResponse;
               }, uiModuleEventOptions
             );
 
