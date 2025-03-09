@@ -127,9 +127,6 @@
         case 'container':
           scriptsToLoad = componentsToLoad;
           break;
-        case 'container_v2':
-          scriptsToLoad = componentsToLoad;
-          break;
         default:
           scriptsToLoad = ['common', ...componentsToLoad];
       }
@@ -287,14 +284,8 @@
             v-bind:namespace="namespace"
           ></agent-assist-ui-modules>
           <agent-assist-ui-modules-v2
-            v-if="authToken && cachedComponents[0] === 'container_v2' && features.length !== 0"
+            v-if="cachedComponents[0] === 'container_v2' && features.length !== 0"
             class="agent-assist-ui-modules"
-            channel="chat"
-            agent-desktop="Custom"
-            v-bind:custom-api-endpoint="proxyServerEndpoint"
-            v-bind:features="features"
-            v-bind:conversation-profile="conversationProfile"
-            v-bind:auth-token="authToken"
             v-bind:namespace="namespace"
           ></agent-assist-ui-modules-v2>
           <agent-assist-summarization
@@ -626,6 +617,18 @@
             addAgentAssistEventListener('api-connector-initialized', () => {
               addConversation(cachedPinnedConversation);
             }, uiModuleEventOptions);
+
+            // Populate agent input box with AI coach suggestion.
+            addAgentAssistEventListener(
+              'agent-coaching-response-selected',
+              ({ detail: { message } }) => {
+                // If agent input box already has a value, remove surrounding whitespace and add a space at the end.
+                if (agentMessage.value) {
+                  agentMessage.value = agentMessage.value.trim() + ' ';
+                }
+                agentMessage.value += message;
+              }, uiModuleEventOptions
+            );
 
             // Populate agent input box with Smart Reply selection.
             addAgentAssistEventListener(
