@@ -96,8 +96,6 @@
             ? `${localUrl}/${component}.js`
             : SCRIPT_SOURCES[environment][component];
 
-        console.log('SOURCE: ', src);
-
         script.setAttribute('src', src);
         document.head.appendChild(script);
 
@@ -543,6 +541,7 @@
             if (!cachedComponents.includes('container')) {
               watch(authToken, (newValue) => {
                 if (!connector) {
+                  console.log('INIT CONNECTOR');
                   connector = new UiModulesConnector();
                   connector.init({
                     channel: 'chat',
@@ -565,6 +564,7 @@
               if (newValue === 'Add new') {
                 addConversation();
               } else {
+                console.log('DISPATCH ACTIVE CONVERSATION SELECTED');
                 dispatchAgentAssistEvent('active-conversation-selected', {
                   detail: {
                     conversationName: newValue,
